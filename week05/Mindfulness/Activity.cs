@@ -58,4 +58,9 @@ public class Activity
     {
         // To be overridden
     }
+
+    public int Duration
+    {
+        get { return _duration; }
+    }
 }

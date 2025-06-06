@@ -49,7 +49,7 @@ class Program
             if (activity != null)
             {
                 activity.Run();
-                activityLog.Add($"{DateTime.Now}: {activityName} for {activity._duration} seconds");
+                activityLog.Add($"{DateTime.Now}: {activityName} for {activity.Duration} seconds");
                 Console.WriteLine("Press Enter to return to the menu.");
                 Console.ReadLine();
             }
@@ -64,3 +64,5 @@ class Program
         Console.WriteLine("Goodbye!");
     }
 }
+
+// Extra feature: This program keeps a log of completed activities and displays it when you quit.
