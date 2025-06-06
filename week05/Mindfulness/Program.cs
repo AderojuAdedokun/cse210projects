@@ -1,10 +1,12 @@
 using System;
+using System.Collections.Generic;
 
 class Program
 {
     static void Main(string[] args)
     {
         bool running = true;
+        List<string> activityLog = new List<string>(); // Extra feature: activity log
 
         while (running)
         {
@@ -19,21 +21,24 @@ class Program
             string choice = Console.ReadLine();
 
             Activity activity = null;
+            string activityName = "";
 
             switch (choice)
             {
                 case "1":
                     activity = new BreathingActivity();
+                    activityName = "Breathing Activity";
                     break;
                 case "2":
                     activity = new ListingActivity();
+                    activityName = "Listing Activity";
                     break;
                 case "3":
                     activity = new ReflectingActivity();
+                    activityName = "Reflecting Activity";
                     break;
                 case "4":
                     running = false;
-                    Console.WriteLine("Goodbye!");
                     break;
                 default:
                     Console.WriteLine("Invalid choice. Press Enter to continue.");
@@ -44,9 +49,18 @@ class Program
             if (activity != null)
             {
                 activity.Run();
+                activityLog.Add($"{DateTime.Now}: {activityName} for {activity._duration} seconds");
                 Console.WriteLine("Press Enter to return to the menu.");
                 Console.ReadLine();
             }
         }
+
+        // Show the activity log when quitting
+        Console.WriteLine("\nActivity Log:");
+        foreach (string log in activityLog)
+        {
+            Console.WriteLine(log);
+        }
+        Console.WriteLine("Goodbye!");
     }
 }
