@@ -12,7 +12,7 @@ public class ChecklistGoal : Goal
         _bonus = bonus;
     }
 
-    // Add this constructor for loading from file
+    // Constructor for loading from file
     public ChecklistGoal(string name, string description, int points, int target, int bonus, int amountCompleted)
         : base(name, description, points)
     {
@@ -23,25 +23,31 @@ public class ChecklistGoal : Goal
 
     public override int RecordEvent()
     {
-        // TODO: Implement
+        if (_amountCompleted < _target)
+        {
+            _amountCompleted++;
+            if (_amountCompleted == _target)
+            {
+                return _points + _bonus;
+            }
+            return _points;
+        }
         return 0;
     }
 
     public override bool IsComplete()
     {
-        // TODO: Implement
-        return false;
+        return _amountCompleted >= _target;
     }
 
     public override string GetDetailsString()
     {
-        // TODO: Implement
-        return "";
+        string check = IsComplete() ? "X" : " ";
+        return $"[{check}] {_shortName} ({_description}) -- Completed {_amountCompleted}/{_target}";
     }
 
     public override string GetStringRepresentation()
     {
-        // TODO: Implement
-        return "";
+        return $"ChecklistGoal:{_shortName},{_description},{_points},{_target},{_bonus},{_amountCompleted}";
     }
 }
